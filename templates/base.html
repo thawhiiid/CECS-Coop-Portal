@@ -1,0 +1,41 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CECS Co-op Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>CECS Co-op Portal</h1>
+        <nav>
+            {% if session.role == 'student' %}
+            <a href="{{ url_for('student_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('student_search') }}">Search Jobs</a>
+            <a href="{{ url_for('student_applications') }}">My Applications</a>
+            {% elif session.role == 'employer' %}
+            <a href="{{ url_for('employer_dashboard') }}">Dashboard</a>
+            {% elif session.role == 'faculty' %}
+            <a href="{{ url_for('faculty_dashboard') }}">Dashboard</a>
+            {% endif %}
+            {% if session.role %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-container">
+        {% for category, msg in messages %}
+        <div class="flash {{ category }}">{{ msg }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

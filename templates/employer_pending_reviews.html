@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Pending Co-op Summary Reviews</h2>
+
+{% if coop_records %}
+  <table>
+    <tr>
+      <th>Student</th>
+      <th>Position</th>
+      <th>Summary Status</th>
+      <th>Employer Approval</th>
+      <th>Action</th>
+    </tr>
+    {% for cr in coop_records %}
+    <tr>
+      <td>{{ cr.student.name }}</td>
+      <td>{{ cr.application.position.title }}</td>
+      <td>{{ cr.summary_status }}</td>
+      <td>{{ cr.employer_approval }}</td>
+      <td>
+        <a href="{{ url_for('employer_review_summary', coop_id=cr.id) }}">Review Summary</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No pending reviews at this time.</p>
+{% endif %}
+{% endblock %}

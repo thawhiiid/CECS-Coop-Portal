@@ -1,0 +1,14 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h2>Submit Co-op Summary</h2>
+
+<p><strong>Position:</strong> {{ application.position.title }} at {{ application.position.employer.company_name }}</p>
+
+<form method="post">
+    <label>Co-op Experience Summary</label><br>
+    <textarea name="summary" rows="10" cols="80">{{ coop_record.summary_text or '' }}</textarea><br><br>
+
+    <button type="submit" name="action" value="draft">Save Draft</button>
+    <button type="submit" name="action" value="submit">Submit Summary</button>
+</form>
+{% endblock %}

@@ -1,0 +1,32 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h2>{{ position.title }}</h2>
+<p><strong>Company:</strong> {{ position.employer.company_name }}</p>
+<p><strong>Location:</strong> {{ position.location }}</p>
+<p><strong>Weeks:</strong> {{ position.weeks }} | <strong>Hours/week:</strong> {{ position.hours_per_week }}</p>
+<p><strong>Total Hours:</strong> {{ position.total_hours }}</p>
+<p><strong>Status:</strong> {{ position.status }}</p>
+<p>{{ position.description }}</p>
+
+{% if session.role == 'student' %}
+  {% if existing_app %}
+      <p><strong>Your Application Status:</strong> {{ existing_app.status }}</p>
+      <p>
+        <strong>Eligibility:</strong>
+        {% if existing_app.eligibility %}
+          {% if existing_app.eligibility.is_eligible %}
+            Eligible
+          {% else %}
+            Not eligible
+          {% endif %}
+        {% else %}
+          Pending
+        {% endif %}
+      </p>
+  {% else %}
+      <form method="post" action="{{ url_for('apply_to_position', position_id=position.id) }}">
+          <button type="submit">Apply</button>
+      </form>
+  {% endif %}
+{% endif %}
+{% endblock %}

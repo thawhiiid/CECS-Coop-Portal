@@ -1,0 +1,28 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h2>Search Internships</h2>
+
+<form method="get">
+    <label>Keyword</label>
+    <input type="text" name="q" value="{{ q or '' }}">
+    <label>Employer</label>
+    <input type="text" name="employer" value="{{ employer_name or '' }}">
+    <label>Location</label>
+    <input type="text" name="location" value="{{ location or '' }}">
+    <button type="submit">Search</button>
+</form>
+
+<h3>Results</h3>
+{% if positions %}
+<ul>
+    {% for p in positions %}
+    <li>
+        <strong>{{ p.title }}</strong> – {{ p.employer.company_name }} ({{ p.location }})<br>
+        <a href="{{ url_for('job_details', position_id=p.id) }}">View details</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No postings found.</p>
+{% endif %}
+{% endblock %}

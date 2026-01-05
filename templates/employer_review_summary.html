@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Review Co-op Summary</h2>
+
+<p><strong>Student:</strong> {{ coop_record.student.name }}</p>
+<p><strong>Position:</strong> {{ coop_record.application.position.title }}</p>
+
+<h3>Submitted Summary</h3>
+<div class="summary-box">
+  <pre>{{ coop_record.summary_text or 'No summary submitted yet.' }}</pre>
+</div>
+
+<form method="post">
+  <label>Employer Decision</label><br>
+  <select name="approval" required>
+    <option value="">Choose...</option>
+    <option value="Approved" {% if coop_record.employer_approval == 'Approved' %}selected{% endif %}>Approve</option>
+    <option value="Rejected" {% if coop_record.employer_approval == 'Rejected' %}selected{% endif %}>Reject</option>
+  </select><br><br>
+
+  <button type="submit">Submit Review</button>
+</form>
+{% endblock %}

@@ -1,0 +1,76 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h2>Employer Dashboard</h2>
+<p>Welcome, {{ employer.company_name }} ({{ employer.id }})</p>
+
+<div class="cards">
+    <a href="#postings" class="card-link">
+      <div class="card">
+          <h3>Active Postings</h3>
+          <p>{{ active_count }}</p>
+      </div>
+    </a>
+    <a href="#postings" class="card-link">
+      <div class="card">
+          <h3>Total Applicants</h3>
+          <p>{{ total_apps }}</p>
+      </div>
+    </a>
+    <a href="#postings" class="card-link">
+      <div class="card">
+          <h3>Candidates Selected</h3>
+          <p>{{ selected_count }}</p>
+      </div>
+    </a>
+    <a href="{{ url_for('employer_pending_reviews') }}" class="card-link">
+      <div class="card">
+          <h3>Pending Reviews</h3>
+          <p>{{ pending_reviews }}</p>
+      </div>
+    </a>
+</div>
+
+<h3 id="postings">Your Job Postings</h3>
+<p><em>Tip: use the form below to add new postings.</em></p>
+<ul>
+  {% for p in positions %}
+  <li>
+    <strong>{{ p.title }}</strong> ({{ p.status }}) –
+    <a href="{{ url_for('employer_applicants', position_id=p.id) }}">View applicants</a>
+  </li>
+  {% endfor %}
+</ul>
+
+<hr>
+<h3>Create / Update Job Posting (simple form)</h3>
+<form method="post" action="{{ url_for('employer_post') }}">
+    <label>Title</label><br>
+    <input type="text" name="title" required><br><br>
+
+    <label>Description</label><br>
+    <textarea name="description" rows="4" cols="60"></textarea><br><br>
+
+    <label>Location</label><br>
+    <input type="text" name="location"><br><br>
+
+    <label>Weeks</label><br>
+    <input type="number" name="weeks" min="0"><br><br>
+
+    <label>Hours per week</label><br>
+    <input type="number" name="hours_per_week" min="0"><br><br>
+
+    <label>Majors of interest</label><br>
+    <input type="text" name="majors_of_interest"><br><br>
+
+    <label>Required skills</label><br>
+    <input type="text" name="required_skills"><br><br>
+
+    <label>Preferred skills</label><br>
+    <input type="text" name="preferred_skills"><br><br>
+
+    <label>Salary info</label><br>
+    <input type="text" name="salary_info"><br><br>
+
+    <button type="submit">Save Posting</button>
+</form>
+{% endblock %}

@@ -1,0 +1,26 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h2>Student Dashboard</h2>
+<p>Welcome back, {{ student.name }} ({{ student.id }})</p>
+
+<div class="cards">
+    <div class="card">
+        <h3>Applications Submitted</h3>
+        <p>{{ total_apps }}</p>
+    </div>
+    <div class="card">
+        <h3>Pending Applications</h3>
+        <p>{{ pending_apps }}</p>
+    </div>
+    <div class="card">
+        <h3>Co-op Eligibility</h3>
+        <p>{{ eligible_flag }}</p>
+    </div>
+</div>
+
+<h3>Quick Actions</h3>
+<ul>
+    <li><a href="{{ url_for('student_search') }}">Search Internships</a></li>
+    <li><a href="{{ url_for('student_applications') }}">View Applications</a></li>
+</ul>
+{% endblock %}

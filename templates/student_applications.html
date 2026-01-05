@@ -1,0 +1,61 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h2>My Applications</h2>
+
+{% if applications %}
+<table>
+  <tr>
+    <th>Position</th>
+    <th>Company</th>
+    <th>Status</th>
+    <th>Eligibility</th>
+    <th>Co-op Interest</th>
+    <th>Applied On</th>
+    <th>Actions</th>
+  </tr>
+  {% for a in applications %}
+  {% set cr = a.coop_record %}
+  <tr>
+    <td>{{ a.position.title }}</td>
+    <td>{{ a.position.employer.company_name }}</td>
+    <td>{{ a.status }}</td>
+    <td>
+      {% if a.eligibility %}
+        {% if a.eligibility.is_eligible %}
+          Eligible
+        {% else %}
+          Not eligible
+        {% endif %}
+      {% else %}
+        Pending
+      {% endif %}
+    </td>
+    <td>
+      {% if cr and cr.student_interested %}
+        Interested in co-op
+      {% elif a.eligibility and a.eligibility.is_eligible %}
+        <form method="post" action="{{ url_for('indicate_interest', app_id=a.id) }}">
+          <button type="submit">Indicate Co-op Interest</button>
+        </form>
+      {% else %}
+        -
+      {% endif %}
+    </td>
+    <td>{{ a.applied_at.strftime('%Y-%m-%d') }}</td>
+    <td>
+      {% if a.status == 'Pending' %}
+      <form method="post" action="{{ url_for('withdraw_application', app_id=a.id) }}" style="display:inline;">
+        <button type="submit">Withdraw</button>
+      </form>
+      {% endif %}
+      {% if cr and cr.student_interested %}
+        <a href="{{ url_for('submit_summary', app_id=a.id) }}">Submit / Edit Co-op Summary</a>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+  <p>No applications yet.</p>
+{% endif %}
+{% endblock %}

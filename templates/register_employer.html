@@ -1,0 +1,28 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h2>Employer Registration</h2>
+<form method="post">
+    <label>Company Name*</label><br>
+    <input type="text" name="company_name" required><br><br>
+
+    <label>Contact Name</label><br>
+    <input type="text" name="contact_name"><br><br>
+
+    <label>Email*</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Phone</label><br>
+    <input type="text" name="phone"><br><br>
+
+    <label>Location</label><br>
+    <input type="text" name="location"><br><br>
+
+    <label>Website</label><br>
+    <input type="url" name="website"><br><br>
+
+    <label>Password*</label><br>
+    <input type="password" name="password" required><br><br>
+
+    <button type="submit">Register</button>
+</form>
+{% endblock %}

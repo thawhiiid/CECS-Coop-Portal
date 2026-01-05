@@ -1,0 +1,36 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h2>Faculty Dashboard</h2>
+<p>Welcome, {{ faculty.name }} ({{ faculty.department }})</p>
+
+<div class="cards">
+    <div class="card"><h3>Total Co-op Students</h3><p>{{ total_students }}</p></div>
+    <div class="card"><h3>Pending Summaries</h3><p>{{ pending_summaries }}</p></div>
+    <div class="card"><h3>Graded</h3><p>{{ graded }}</p></div>
+    <div class="card"><h3>Awaiting Employer Approval</h3><p>{{ awaiting_approval }}</p></div>
+</div>
+
+<h3>Co-op Records</h3>
+<table>
+    <tr>
+        <th>Student</th>
+        <th>Position</th>
+        <th>Summary Status</th>
+        <th>Employer Approval</th>
+        <th>Grade</th>
+        <th>Action</th>
+    </tr>
+    {% for cr in coop_records %}
+    <tr>
+        <td>{{ cr.student.name }}</td>
+        <td>{{ cr.application.position.title }}</td>
+        <td>{{ cr.summary_status }}</td>
+        <td>{{ cr.employer_approval }}</td>
+        <td>{{ cr.faculty_grade or '-' }}</td>
+        <td>
+            <a href="{{ url_for('faculty_grade', coop_id=cr.id) }}">Grade</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
