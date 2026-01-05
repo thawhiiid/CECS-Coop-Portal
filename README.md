@@ -22,7 +22,7 @@ The platform supports **three user roles**:
 - **Database:** SQLite (SQLAlchemy ORM)
 - **Frontend:** HTML, CSS (Jinja templates)
 - **Authentication:** Role-based login with hashed passwords
-- **Architecture:** MVC-style routing with REST-style endpoints
+- **Architecture:** MVC-style structure with modular routing
 
 ---
 
@@ -47,7 +47,7 @@ The platform supports **three user roles**:
 
 ### 📬 Automated Workflow & Notifications
 - System automatically updates statuses when actions occur
-- Eligible selected students receive automated email notifications (simulated)
+- Eligible selected students trigger automated notification logic (email delivery simulated via console output).
 - Students can indicate interest in co-op credit directly in the portal
 
 ### 🧑‍🏫 Faculty Coordination & Grading
