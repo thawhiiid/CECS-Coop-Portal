@@ -1,5 +1,4 @@
-# CECS-Coop-Portal
-# Full-Stack Co-op Automation & Management System
+# CECS-Coop-Portal Full-Stack Co-op Automation & Management System
 
 A full-stack web application designed to automate and manage the university co-op process for students, employers, and faculty coordinators. This system streamlines internship applications, eligibility evaluation, co-op summaries, and grading workflows using role-based access and automated decision logic.
 
